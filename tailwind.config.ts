@@ -112,13 +112,45 @@ export default {
 						opacity: '1'
 					}
 				},
+				'color-pulse': {
+					'0%, 100%': {
+						'background-position': '0% 50%'
+					},
+					'50%': {
+						'background-position': '100% 50%'
+					}
+				},
+				'text-shimmer': {
+					'0%': {
+						'background-position': '100% 50%'
+					},
+					'100%': {
+						'background-position': '0% 50%'
+					}
+				},
+				'rotate-slow': {
+					'0%': {
+						transform: 'rotate(0deg)'
+					},
+					'100%': {
+						transform: 'rotate(360deg)'
+					}
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
-			}
+				'color-pulse': 'color-pulse 8s ease-in-out infinite',
+				'text-shimmer': 'text-shimmer 3s ease infinite',
+				'rotate-slow': 'rotate-slow 20s linear infinite',
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-glow': 'linear-gradient(90deg, #D946EF, #8B5CF6, #0EA5E9, #D946EF)',
+				'gradient-text': 'linear-gradient(45deg, #D946EF, #8B5CF6, #0EA5E9)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

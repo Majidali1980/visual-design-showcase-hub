@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -34,47 +35,88 @@ const Portfolio = () => {
     setActiveFilter(category);
   };
   
+  // Animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+  
   return (
     <>
       <Navbar />
       
       {/* Portfolio Header */}
-      <section className="pt-32 pb-16 bg-gray-50">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="pt-32 pb-16 bg-gradient-to-b from-background to-secondary/20"
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h1 className="text-4xl font-bold mb-6">Portfolio</h1>
-            <p className="text-gray-600">
+            <motion.h1 
+              initial={fadeInUp.hidden}
+              animate={fadeInUp.visible}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="text-4xl font-bold mb-6 text-gradient"
+            >
+              Portfolio
+            </motion.h1>
+            <motion.p 
+              initial={fadeInUp.hidden}
+              animate={fadeInUp.visible}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="text-muted-foreground"
+            >
               Explore my collection of design projects across various categories, including branding, 
               logo design, posters, social media, and more.
-            </p>
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
       
       {/* Portfolio Gallery */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           {/* Filter */}
-          <PortfolioFilter
-            categories={categories}
-            onFilterChange={handleFilterChange}
-            activeFilter={activeFilter}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            <PortfolioFilter
+              categories={categories}
+              onFilterChange={handleFilterChange}
+              activeFilter={activeFilter}
+            />
+          </motion.div>
           
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.map((item) => (
-              <PortfolioItem key={item.id} {...item} />
+            {filteredItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+              >
+                <PortfolioItem {...item} />
+              </motion.div>
             ))}
           </div>
           
           {filteredItems.length === 0 && (
-            <div className="text-center py-12">
-              <h3 className="text-xl font-medium">No projects found</h3>
-              <p className="text-gray-600 mt-2">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center py-16"
+            >
+              <h3 className="text-xl font-medium mb-2">No projects found</h3>
+              <p className="text-muted-foreground">
                 No projects match the selected filter.
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </section>
