@@ -2,15 +2,65 @@
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const About = () => {
   const skills = [
-    { name: "Brand Identity", proficiency: 95 },
-    { name: "Logo Design", proficiency: 90 },
-    { name: "Typography", proficiency: 85 },
-    { name: "Print Design", proficiency: 88 },
-    { name: "Social Media", proficiency: 92 },
-    { name: "UI/UX Design", proficiency: 80 }
+    { 
+      name: "Brand Identity", 
+      proficiency: 95,
+      images: [
+        "https://images.unsplash.com/photo-1635405074683-96d6b313e34a?q=80&w=3000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1557131399-a0fdd5d62a7c?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1524293568345-75d62c3664f7?q=80&w=2000&auto=format&fit=crop"
+      ]
+    },
+    { 
+      name: "Logo Design", 
+      proficiency: 90,
+      images: [
+        "https://images.unsplash.com/photo-1594587636268-b38a6ef215f5?q=80&w=2700&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1629429407759-01cd3d7cfb38?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2000&auto=format&fit=crop"
+      ]
+    },
+    { 
+      name: "Typography", 
+      proficiency: 85,
+      images: [
+        "https://images.unsplash.com/photo-1611155155386-8261dc2984a6?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1467991521834-fb8e202c7074?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1562932831-afcadcfa4cae?q=80&w=2000&auto=format&fit=crop"
+      ]
+    },
+    { 
+      name: "Print Design", 
+      proficiency: 88,
+      images: [
+        "https://images.unsplash.com/photo-1472572349882-fb7cb873552a?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1601276174812-63015a70209b?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1515448392538-99de4ad97d1c?q=80&w=2000&auto=format&fit=crop"
+      ]
+    },
+    { 
+      name: "Social Media", 
+      proficiency: 92,
+      images: [
+        "https://images.unsplash.com/photo-1611262588024-d12430b98920?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1579869847514-7c1a19d2d2ad?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=2000&auto=format&fit=crop"
+      ]
+    },
+    { 
+      name: "UI/UX Design", 
+      proficiency: 80,
+      images: [
+        "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=2000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1603969072881-b0fc7f3d77d7?q=80&w=2000&auto=format&fit=crop"
+      ]
+    }
   ];
 
   const fadeInUp = {
@@ -115,13 +165,13 @@ const About = () => {
         </div>
       </section>
       
-      {/* Skills Section */}
+      {/* Skills Section with Portfolio Images */}
       <section className="py-16 bg-secondary/20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-12 text-center text-gradient">My Skills</h2>
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold mb-12 text-center text-gradient">My Skills & Work</h2>
             
-            <div className="space-y-6">
+            <div className="space-y-16">
               {skills.map((skill, index) => (
                 <motion.div 
                   key={skill.name}
@@ -129,20 +179,56 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="space-y-2"
                 >
-                  <div className="flex justify-between">
-                    <span className="font-medium">{skill.name}</span>
-                    <span>{skill.proficiency}%</span>
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-xl font-semibold">{skill.name}</span>
+                      <span>{skill.proficiency}%</span>
+                    </div>
+                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.proficiency}%` }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 + index * 0.1, duration: 0.8, ease: "easeOut" }}
+                        className="h-full bg-gradient-animated rounded-full"
+                      ></motion.div>
+                    </div>
                   </div>
-                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.proficiency}%` }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.5 + index * 0.1, duration: 0.8, ease: "easeOut" }}
-                      className="h-full bg-gradient-animated rounded-full"
-                    ></motion.div>
+                  
+                  {/* Portfolio Carousel for Each Skill */}
+                  <div className="mt-6">
+                    <Carousel
+                      opts={{
+                        align: "start",
+                        loop: true,
+                      }}
+                      className="w-full"
+                    >
+                      <CarouselContent>
+                        {skill.images.map((image, imageIndex) => (
+                          <CarouselItem key={imageIndex} className="md:basis-1/2 lg:basis-1/3">
+                            <motion.div 
+                              whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+                              className="bg-secondary/30 rounded-xl overflow-hidden"
+                            >
+                              <AspectRatio ratio={16/9}>
+                                <img 
+                                  src={image} 
+                                  alt={`${skill.name} Work Sample ${imageIndex + 1}`}
+                                  className="object-cover w-full h-full"
+                                />
+                              </AspectRatio>
+                              <div className="p-4">
+                                <h4 className="text-sm font-medium">{skill.name} - Sample {imageIndex + 1}</h4>
+                              </div>
+                            </motion.div>
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="left-2 bg-secondary/80 hover:bg-secondary text-foreground" />
+                      <CarouselNext className="right-2 bg-secondary/80 hover:bg-secondary text-foreground" />
+                    </Carousel>
                   </div>
                 </motion.div>
               ))}
