@@ -90,8 +90,9 @@
   @apply bg-gradient-glow bg-[length:200%_100%] animate-color-pulse;
 }
 
+/* Fixed circular dependency by removing the self-referential @apply */
 .animate-fade-in {
-  @apply animate-fade-in;
+  animation: fade-in 0.3s ease-out;
 }
 
 #root {

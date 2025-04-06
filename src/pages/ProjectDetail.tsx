@@ -219,7 +219,7 @@ const ProjectDetail = () => {
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
       
       {/* Next Projects */}
       <section className="py-16 bg-secondary/20">
